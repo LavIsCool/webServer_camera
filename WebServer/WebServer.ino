@@ -21,7 +21,7 @@ bool BlueState = false;
 
 void initWifi() {
   WiFi.mode(WIFI_STA);
-  WiFi.begin(l_ssid, l_password);
+  WiFi.begin(ssid, password);
   Serial.print("Connecting to ");
   Serial.print(ssid);
   while (WiFi.status() != WL_CONNECTED){
