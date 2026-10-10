@@ -15,9 +15,9 @@ function setColors() {
     var btn_red = document.getElementById("btnred");
     var btn_green = document.getElementById("btngreen");
     var btn_blue = document.getElementById("btnblue");
-    if (redState) btn_red.innerText = "red on "; else btn_red.innerText = "red off";
-    if (greenState) btn_green.innerText = "green on "; else btn_green.innerText = "green off";
-    if (blueState) btn_blue.innerText = "blue on "; else btn_blue.innerText = "blue off";
+    if (redState) btn_red.className = "button red onred"; else btn_red.className = "button red OFF";
+    if (greenState) btn_green.className = "button green ongreen"; else btn_green.className = "button green OFF";
+    if (blueState) btn_blue.className = "button blue onblue"; else btn_blue.className = "button blue OFF";
 }
 
 function getData() {

@@ -70,9 +70,12 @@ void handleRoot() {
 void handleFile(String file_path, String file_type) {
   File file = LittleFS.open(file_path, "r");
   if (file) {
+    server.sendHeader("Cache-Control", "public, max-age=86400");
     server.streamFile(file, file_type);
     file.close();
-  } else { server.send(404, "text/plain", file_path + " not found");}
+  } else { 
+    server.send(404, "text/plain", file_path + " not found");
+  }
 }
 
 void handleToggle() {

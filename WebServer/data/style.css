@@ -2,3 +2,32 @@ body {
     background-color: aquamarine;
     text-align: center;
 }
+
+.button {
+    border-radius: 8px;
+    padding: 16px 40px;
+    width: 150px;
+}
+
+.OFF {
+    background-color: gray;
+    
+}
+.red {
+    border-color: red;
+}
+.green {
+    border-color: green;
+}
+.blue {
+    border-color: blue;
+}
+.onred {
+    background-color: red;
+}
+.ongreen {
+    background-color: green;
+}
+.onblue {
+    background-color: blue;
+}
