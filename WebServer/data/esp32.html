@@ -7,14 +7,22 @@
         <script src="script.js" defer></script>
     </head>
     <body>
-        <h1>Cool Header</h1>
-        <button class="button OFF red" id="btnred" onclick="toggleColor('red')">red</button>
-        <button class="button OFF green" id="btngreen" onclick="toggleColor('green')">green</button>
-        <button class="button OFF blue" id="btnblue" onclick="toggleColor('blue')">blue</button>
-        <p>Temperature: <span id="temperature"></span></p>
-        <p>Humidity: <span id="humidity"></span>%</p>
-        <video width="600" controls>
-            <source src="Radar.mp4" type="video/mp4">
-        </video>
+        <div class="content">
+            <div class="main">
+                <h1>Cool Header</h1>
+                <button class="button OFF red" id="btnred" onclick="toggleColor('red')">red</button>
+                <button class="button OFF green" id="btngreen" onclick="toggleColor('green')">green</button>
+                <button class="button OFF blue" id="btnblue" onclick="toggleColor('blue')">blue</button>
+                <div class="temp">
+                    <p>Temperature: <span id="temperature"></span></p>
+                    <p>Humidity: <span id="humidity"></span>%</p>
+                </div>
+                <video width="400" controls>
+                    <source src="Radar.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+        <div class="interactive-bg" id="bg-container">
+        </div>
     </body>
 </html>

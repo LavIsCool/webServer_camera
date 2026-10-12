@@ -40,3 +40,38 @@ function useData(data) {
 
 getData();
 setInterval(getData, 1000);
+
+function creatBG() {
+    const container = document.getElementById('bg-container');
+    const numberOfShapes = 500;
+    const speed_range = 20;
+    for (let i = 0; i < numberOfShapes; i++) {
+    const shape = document.createElement('div');
+    shape.classList.add('layer');
+    const size = Math.floor(Math.random() * 300) + 100; // Size between 100px and 400px
+    const top = Math.random() * 100; // Random top %
+    const left = Math.random() * 100; // Random left %
+    const speed = (Math.random() * speed_range) - speed_range/2; // Random speed between -4 and 4
+    const r = Math.floor(Math.random() * 255);
+    const g = Math.floor(Math.random() * 255);
+    const b = Math.floor(Math.random() * 255);
+    shape.style.width = `${size}px`;
+    shape.style.height = `${size}px`;
+    shape.style.top = `${top}%`;
+    shape.style.left = `${left}%`;
+    shape.style.background = `radial-gradient(circle, rgba(${r},${g},${b},0.3) 0%, rgba(0,0,0,0) 70%)`;
+    shape.dataset.speed = speed;
+    container.appendChild(shape);
+    }
+}
+document.addEventListener("DOMContentLoaded", creatBG);
+document.addEventListener("mousemove", (e) => {
+  const layers = document.querySelectorAll(".layer");
+  const x = (window.innerWidth / 2 - e.pageX) / 50;
+  const y = (window.innerHeight / 2 - e.pageY) / 50;
+
+  layers.forEach((layer) => {
+    const speed = layer.dataset.speed;
+    layer.style.transform = `translateX(${x * speed}px) translateY(${y * speed}px)`;
+  });
+});
