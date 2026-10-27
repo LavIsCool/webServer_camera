@@ -2,8 +2,8 @@
 #include <WebServer.h>
 #include <LittleFS.h>
 #include <Adafruit_AHTX0.h>
-const char* ssid = "Vaismannew";
-const char* password = "015666456";
+const char* ssid = "Lavi_is_cool";
+const char* password = "";
 
 WebServer server(80);
 Adafruit_AHTX0 aht;
@@ -21,6 +21,7 @@ bool BlueState = false;
 
 void initWifi() {
   WiFi.mode(WIFI_STA);
+  WiFi.disconnect();
   WiFi.begin(ssid, password);
   Serial.print("Connecting to ");
   Serial.print(ssid);
@@ -30,6 +31,12 @@ void initWifi() {
   }
   Serial.print("Connected\nIP: ");
   Serial.println(WiFi.localIP());
+}
+
+void initWIFIAP() {
+  WiFi.softAP(ssid, password);
+  Serial.print("AP IP address: ");
+  Serial.println(WiFi.softAPIP());
 }
 
 void initAht() {
@@ -64,7 +71,9 @@ void handleRoot() {
     file.close();
     return;
   }
-  server.send(200, "text/html", file);
+  String html = file.readString();
+  file.close();
+  server.send(200, "text/html", html);
 }
 
 void handleFile(String file_path, String file_type) {
@@ -118,7 +127,7 @@ void setup() {
     Serial.println("An Error occurred while mounting LittleFS");
     return;
   }
-  initWifi();
+  initWIFIAP();
   initServer();
   initAht();
   initPins();
