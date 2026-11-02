@@ -2,7 +2,6 @@ body {
   width: 100%;
   height: 100vh;
   background-color: #0f172a;
-  overflow: hidden;
 }
 
 .main {
@@ -29,21 +28,6 @@ body {
     background-color: blue;
     width: 10vw;
     margin: auto;
-}
-.interactive-bg {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: -1;
-}
-.layer {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  transform: translate(0, 0);
-  z-index: -1;
 }
 
 

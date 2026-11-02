@@ -10,8 +10,12 @@
 // ===========================
 // Enter your WiFi credentials
 // ===========================
-const char *ssid = "Modin-Students";
+const char *ssid = "Lavi_is_cool";
 const char *password = "";
+
+IPAddress local_IP(192, 168, 4, 50);
+IPAddress gateway(192, 168, 4, 1);
+IPAddress subnet(255, 255, 255, 0);
 
 void startCameraServer();
 void setupLedFlash();
@@ -107,6 +111,9 @@ void setup() {
 #if defined(LED_GPIO_NUM)
   setupLedFlash();
 #endif
+  if (!WiFi.config(local_IP, gateway, subnet)) {
+    Serial.println("STA Failed to configure Static IP");
+  }
 
   WiFi.begin(ssid, password);
   WiFi.setSleep(false);
@@ -124,6 +131,7 @@ void setup() {
   Serial.print("Camera Ready! Use 'http://");
   Serial.print(WiFi.localIP());
   Serial.println("' to connect");
+  Serial.println(psramFound());
 }
 
 void loop() {
