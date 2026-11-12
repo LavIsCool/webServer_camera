@@ -1,4 +1,4 @@
-void handleRoot(WiFiClient& client) {
+void handleRoot() {
   File file = LittleFS.open("/esp32.html", "r");
   if (!file) {
     file.close();
@@ -6,32 +6,32 @@ void handleRoot(WiFiClient& client) {
   }
   String html = file.readString();
   file.close();
-  sendServer(client, "text/html", html);
+  server.send("text/html", html);
 }
 
-void handleFile(WiFiClient& client, String file_path, String file_type) {
+void handleFile(String file_path, String file_type) {
   File file = LittleFS.open(file_path, "r");
   if (!file) {
     file.close();
     return;
   }
-  streamServer(client, file_type, file);
+  server.streamFile(file_type, file);
   file.close();
 }
 
-void handleToggle(WiFiClient& client) {
-  if (args.indexOf("state") != -1) {
-    String state = args.substring(args.indexOf('=')+1);
+void handleToggle() {
+  if (server.hasArg("state")) {
+    String state = server.arg("state");
     Serial.println(state);
     if (state == "red") RedState = !RedState;
     if (state == "green") GreenState = !GreenState;
     if (state == "blue") BlueState = !BlueState;
     setLeds();
-    sendServer(client, "text/plain", "ok");
+    server.send("text/plain", "ok");
   }
 }
 
-void handleData(WiFiClient& client) {
+void handleData() {
   String json = "{";
   json += R"("temperature":)";
   json += String(temperature);
@@ -45,5 +45,5 @@ void handleData(WiFiClient& client) {
   json += BlueState;
   json += "}";
 
-  sendServer(client, "application/json", json);
+  server.send("application/json", json);
 }

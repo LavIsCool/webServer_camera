@@ -28,12 +28,12 @@ void setLeds() {
 }
 
 void initServer() {
-  on("/", handleRoot);
-  on("/toggle", handleToggle);
-  on("/data", handleData);
-  on("/script.js",  [](WiFiClient& client) { handleFile(client, "/script.js", "text/javascript"); });
-  on("/style.css",  [](WiFiClient& client) { handleFile(client, "/style.css", "text/css"); });
-  on("/Radar.mp4",  [](WiFiClient& client) { handleFile(client, "/Radar.mp4", "video/mp4"); });
-  on("/favicon.ico",[](WiFiClient& client) { handleFile(client, "/favicon.ico", "image/x-icon"); });
+  server.on("/", handleRoot);
+  server.on("/toggle", handleToggle);
+  server.on("/data", handleData);
+  server.on("/script.js",  []() { handleFile("/script.js", "text/javascript"); });
+  server.on("/style.css",  []() { handleFile("/style.css", "text/css"); });
+  server.on("/Radar.mp4",  []() { handleFile("/Radar.mp4", "video/mp4"); });
+  server.on("/favicon.ico",[]() { handleFile("/favicon.ico", "image/x-icon"); });
   server.begin();
 }

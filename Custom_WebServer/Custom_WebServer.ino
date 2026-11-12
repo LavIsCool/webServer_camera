@@ -1,10 +1,11 @@
 #include <WiFi.h>
 #include <LittleFS.h>
 #include <Adafruit_AHTX0.h>
+#include "CustomServer.h"
 const char* ssid = "Lavi_is_webserver";
 const char* password = "webserver";
 
-WiFiServer server(80);
+CustomServer server(80);
 Adafruit_AHTX0 aht;
 
 #define Red 26
@@ -31,7 +32,7 @@ void setup() {
 }
 
 void loop() {
-  handleClient(server);
+  server.handleClient();
   sensors_event_t hum, temp;
   aht.getEvent(&hum, &temp);
   temperature = temp.temperature;
