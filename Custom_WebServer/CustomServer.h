@@ -37,9 +37,10 @@ class CustomServer {
 
     void begin() {server.begin();}
 
-    void send(String type, String data) {
+    void send(int code, String type, String data) {
       // Send the HTTP response header
-      client.println("HTTP/1.1 200 OK");
+      client.print("HTTP/1.1 ");
+      client.println(code);
       client.print("Content-Type: ");
       client.println(type);
       client.println("Connection: close");
@@ -48,9 +49,10 @@ class CustomServer {
       client.println(data);
     }
 
-    void streamFile(String type, File file) {
+    void streamFile(int code, String type, File file) {
       // Send the HTTP response header
-      client.println("HTTP/1.1 200 OK");
+      client.print("HTTP/1.1 ");
+      client.println(code);
       client.print("Content-Type: ");
       client.println(type);
       client.print("Content-Length: ");

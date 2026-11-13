@@ -2,20 +2,22 @@ void handleRoot() {
   File file = LittleFS.open("/esp32.html", "r");
   if (!file) {
     file.close();
+    server.send(404, "text/plain", "esp.html not found");
     return;
   }
   String html = file.readString();
   file.close();
-  server.send("text/html", html);
+  server.send(200, "text/html", html);
 }
 
 void handleFile(String file_path, String file_type) {
   File file = LittleFS.open(file_path, "r");
   if (!file) {
     file.close();
+    server.send(404, "text/plain", file_path + "not found");
     return;
   }
-  server.streamFile(file_type, file);
+  server.streamFile(200, file_type, file);
   file.close();
 }
 
@@ -27,7 +29,7 @@ void handleToggle() {
     if (state == "green") GreenState = !GreenState;
     if (state == "blue") BlueState = !BlueState;
     setLeds();
-    server.send("text/plain", "ok");
+    server.send(200, "text/plain", "ok");
   }
 }
 
@@ -45,5 +47,5 @@ void handleData() {
   json += BlueState;
   json += "}";
 
-  server.send("application/json", json);
+  server.send(200, "application/json", json);
 }
