@@ -9,23 +9,21 @@ class CustomServer {
     WiFiClient client;
 
     void separateArgs(String args) {
-      bool run = true;
       String key = "";
       String value = "";
       int pos1;
       int pos2;
       String str = args;
       String temp = "";
-      while (run) {
+      while (true) {
         ARGS.clear();
         pos1 = str.indexOf('&');
         if (pos1 == -1) {
           temp = str;
-          run = false;
-        } else {
-          temp = str.substring(0, pos1);
-          str = str.substring(pos1+1);
+          return
         }
+        temp = str.substring(0, pos1);
+        str = str.substring(pos1+1);
         pos2 = temp.indexOf('=');
         key = temp.substring(0,pos2);
         value = temp.substring(pos2+1);
