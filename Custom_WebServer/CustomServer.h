@@ -16,12 +16,12 @@ class CustomServer {
       int pos2;
       String str = args;
       String temp = "";
+      ARGS.clear();
       while (run) {
-        ARGS.clear();
         pos1 = str.indexOf('&');
         if (pos1 == -1) {
           temp = str;
-          run = falsep;
+          run = false;
         } else {
           temp = str.substring(0, pos1);
           str = str.substring(pos1+1);
@@ -108,7 +108,7 @@ class CustomServer {
         auto& handleFunc = item.second;
         if (req == url) { handleFunc(); }
       }
-      delay(10);
+      delay(1);
       client.stop();
     }
 };
