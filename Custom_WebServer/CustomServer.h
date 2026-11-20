@@ -92,9 +92,9 @@ class CustomServer {
       client = server.available();
       if (!client) return;
       String request = client.readStringUntil('\r');
-      int firstSpace = request.indexOf(' ');
-      int secondSpace = request.indexOf(' ', firstSpace + 1);
-      String fullPath = request.substring(firstSpace + 1, secondSpace);
+      int space1 = request.indexOf(' ');
+      int space2 = request.indexOf(' ', space1 + 1);
+      String fullPath = request.substring(space1 + 1, space2);
       String req = fullPath;
       String args = "";
       int pos = fullPath.indexOf('?');
